@@ -1,0 +1,58 @@
+# =============================================================================
+# TranscriptInsight — .gitignore
+# =============================================================================
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+
+# Replit
+.cache/
+.local/
+attached_assets/
+.replit.nix
+*.replit.bak
+
+# Monorepo scaffolding (not part of this project)
+lib/
+scripts/
+
+# Build output
+dist/
+tmp/
+out-tsc/
+*.tsbuildinfo
+
+# Logs
+npm-debug.log*
+yarn-error.log*
+*.log
+
+# Uploads (audio files processed at runtime — never commit)
+uploads/
+tmp-uploads/
+*.webm
+*.mp4
+*.mp3
+*.m4a
+*.wav
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.sublime-workspace
+
+# Coverage
+coverage/

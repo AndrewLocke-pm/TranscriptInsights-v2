@@ -1,0 +1,48 @@
+modules = ["nodejs-24"]
+
+[deployment]
+deploymentTarget = "autoscale"
+run = ["sh", "-c", "cd transcript-insights-api && node index.js"]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "transcript-insights-api"
+
+[[workflows.workflow]]
+name = "transcript-insights-api"
+author = "agent"
+
+[workflows.workflow.metadata]
+outputType = "console"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd transcript-insights-api && PORT=3001 node index.js"
+waitForPort = 3001
+
+[agent]
+stack = "nodejs"
+expertMode = true
+
+[postMerge]
+path = "scripts/post-merge.sh"
+timeoutMs = 20000
+
+[nix]
+channel = "stable-25_05"
+
+[[ports]]
+localPort = 3001
+externalPort = 80
+
+[[ports]]
+localPort = 8080
+externalPort = 8080
